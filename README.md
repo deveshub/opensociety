@@ -1,8 +1,13 @@
-# Open Society Main Frontend Gateway
+# Open Society
 
-This is a "gateway" application intended to be part of a microservice architecture. This is the frontend gateway of the application and it connects with other microservices via Spring Cloud Gateway as implemented in this module.
+Open society is an open-source housing society management application which is divided into 3 microservices: 
+- Communication Service
+- Visitor Service
+- Frontend Gateway Service
 
-This application is configured for Service Discovery and Configuration with the Service Registry. On launch, it will refuse to start if it is not able to connect to the Service Registry at [http://localhost:8761](http://localhost:8761).
+The details of each microservice above are maintained in the respective readme files of each microservice in their own folder.
+
+This application is configured for Service Discovery and Configuration with the Service Registry. On launch, it will refuse to start if it is not able to connect to the Service Registry at [http://localhost:8761](http://localhost:8761). 
 
 ## Project Structure
 
@@ -14,6 +19,7 @@ In the project root,
 
 - `.yo-rc.json` - Yeoman configuration file
 - `.yo-resolve` (optional) - Yeoman conflict resolver
+- `.jhipster/*.json` - Entity configuration files
 
 - `npmw` - wrapper to use locally installed npm.
   The app installs Node and npm locally using the build tool by default. This wrapper makes sure npm is installed locally and uses it avoiding some differences different versions can cause. By using `./npmw` instead of the traditional `npm` you can configure a Node-less environment to develop or test your application.
@@ -176,9 +182,9 @@ Then, run a Sonar analysis:
 ./gradlew -Pprod clean check jacocoTestReport sonarqube
 ```
 
-## Using Docker to simplify development
+## Using Docker to simplify development (optional)
 
-You can use Docker to improve your application development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 
 For example, to start a mysql database in a docker container, run:
 

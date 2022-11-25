@@ -1,0 +1,53 @@
+{
+  "applications": ["openSociety", "visitorService"],
+  "changelogDate": "20221125204153",
+  "clientRootFolder": "visitorService",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "visitor",
+  "fields": [
+    {
+      "fieldName": "visitorType",
+      "fieldType": "VisitorType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "GUEST,DELIVERY,STAFF,OTHER"
+    },
+    {
+      "fieldName": "mobile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "vehicleNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "inTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "outTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "microserviceName": "visitorService",
+  "name": "Visitor",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "visitingFlat",
+      "otherEntityRelationshipName": "visitor",
+      "ownerSide": true,
+      "relationshipName": "visitingFlat",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "no"
+}

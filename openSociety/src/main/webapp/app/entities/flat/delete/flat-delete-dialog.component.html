@@ -1,0 +1,25 @@
+<form *ngIf="flat" name="deleteForm" (ngSubmit)="confirmDelete(flat.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="flatDeleteDialogHeading" bitsTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <bits-alert-error></bits-alert-error>
+
+    <p id="bits-delete-flat-heading" bitsTranslate="openSocietyApp.flat.delete.question" [translateValues]="{ id: flat.id }">
+      Are you sure you want to delete this Flat?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span bitsTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="bits-confirm-delete-flat" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span bitsTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

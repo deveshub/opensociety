@@ -1,0 +1,76 @@
+<div>
+  <h2 id="page-heading" data-cy="NoticeHeading">
+    <span bitsTranslate="openSocietyApp.communicationServiceNotice.home.title">Notices</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.communicationServiceNotice.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-notice"
+        [routerLink]="['/notice/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.communicationServiceNotice.home.createLabel"> Create a new Notice </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notices?.length === 0">
+    <span bitsTranslate="openSocietyApp.communicationServiceNotice.home.notFound">No notices found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="notices && notices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.communicationServiceNotice.title">Title</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.communicationServiceNotice.body">Body</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.communicationServiceNotice.publishDate">Publish Date</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.communicationServiceNotice.noticeType">Notice Type</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.communicationServiceNotice.userId">User Id</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let notice of notices; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/notice', notice.id, 'view']">{{ notice.id }}</a>
+          </td>
+          <td>{{ notice.title }}</td>
+          <td>{{ notice.body }}</td>
+          <td>{{ notice.publishDate | formatMediumDatetime }}</td>
+          <td bitsTranslate="{{ 'openSocietyApp.NoticeType.' + notice.noticeType }}">{{ notice.noticeType }}</td>
+          <td>{{ notice.userId }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/notice', notice.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/notice', notice.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(notice)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

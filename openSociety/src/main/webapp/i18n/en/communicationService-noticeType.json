@@ -1,0 +1,12 @@
+{
+  "openSocietyApp": {
+    "NoticeType": {
+      "null": "",
+      "SOCIETY": "SOCIETY",
+      "EVENT": "EVENT",
+      "FINANCE": "FINANCE",
+      "COMMERCIAL": "COMMERCIAL",
+      "EMERGENCY": "EMERGENCY"
+    }
+  }
+}

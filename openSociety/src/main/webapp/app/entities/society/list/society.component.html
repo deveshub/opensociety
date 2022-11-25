@@ -1,0 +1,80 @@
+<div>
+  <h2 id="page-heading" data-cy="SocietyHeading">
+    <span bitsTranslate="openSocietyApp.society.home.title">Societies</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.society.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-society"
+        [routerLink]="['/society/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.society.home.createLabel"> Create a new Society </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="societies?.length === 0">
+    <span bitsTranslate="openSocietyApp.society.home.notFound">No societies found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="societies && societies.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.society.name">Name</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.society.description">Description</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let society of societies; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/society', society.id, 'view']">{{ society.id }}</a>
+          </td>
+          <td>{{ society.name }}</td>
+          <td>{{ society.description }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/society', society.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/society', society.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(society)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

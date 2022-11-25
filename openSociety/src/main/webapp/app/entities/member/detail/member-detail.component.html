@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="member">
+      <h2 data-cy="memberDetailsHeading"><span bitsTranslate="openSocietyApp.member.detail.title">Member</span></h2>
+
+      <hr />
+
+      <bits-alert-error></bits-alert-error>
+
+      <bits-alert></bits-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span bitsTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ member.id }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.name">Name</span></dt>
+        <dd>
+          <span>{{ member.name }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.mobile">Mobile</span></dt>
+        <dd>
+          <span>{{ member.mobile }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.email">Email</span></dt>
+        <dd>
+          <span>{{ member.email }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.memberType">Member Type</span></dt>
+        <dd>
+          <span bitsTranslate="{{ 'openSocietyApp.MemberType.' + member.memberType }}">{{ member.memberType }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.user">User</span></dt>
+        <dd>
+          <span>{{ member.user?.login }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.member.flat">Flat</span></dt>
+        <dd>
+          <div *ngIf="member.flat">
+            <a [routerLink]="['/flat', member.flat?.id, 'view']">{{ member.flat?.flatNo }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span bitsTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/member', member.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span bitsTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

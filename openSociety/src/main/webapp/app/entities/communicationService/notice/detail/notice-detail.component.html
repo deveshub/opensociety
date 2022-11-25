@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="notice">
+      <h2 data-cy="noticeDetailsHeading"><span bitsTranslate="openSocietyApp.communicationServiceNotice.detail.title">Notice</span></h2>
+
+      <hr />
+
+      <bits-alert-error></bits-alert-error>
+
+      <bits-alert></bits-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span bitsTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ notice.id }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.communicationServiceNotice.title">Title</span></dt>
+        <dd>
+          <span>{{ notice.title }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.communicationServiceNotice.body">Body</span></dt>
+        <dd>
+          <span>{{ notice.body }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.communicationServiceNotice.publishDate">Publish Date</span></dt>
+        <dd>
+          <span>{{ notice.publishDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.communicationServiceNotice.noticeType">Notice Type</span></dt>
+        <dd>
+          <span bitsTranslate="{{ 'openSocietyApp.NoticeType.' + notice.noticeType }}">{{ notice.noticeType }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.communicationServiceNotice.userId">User Id</span></dt>
+        <dd>
+          <span>{{ notice.userId }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span bitsTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/notice', notice.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span bitsTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

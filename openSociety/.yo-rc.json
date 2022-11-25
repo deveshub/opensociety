@@ -1,0 +1,59 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "communicationService": {
+        "applicationIndex": 2,
+        "serverPort": "8082"
+      },
+      "visitorService": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      }
+    },
+    "authenticationType": "jwt",
+    "baseName": "openSociety",
+    "blueprints": [],
+    "buildTool": "gradle",
+    "cacheProvider": "no",
+    "clientFramework": "angularX",
+    "clientPackageManager": "npm",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1669408673853,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "devServerPort": 4200,
+    "dtoSuffix": "DTO",
+    "enableGradleEnterprise": false,
+    "enableHibernateCache": false,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "entities": ["Member", "Notice", "Flat", "Visitor", "Society", "VisitingFlat"],
+    "entitySuffix": "",
+    "gradleEnterpriseHost": "",
+    "jhiPrefix": "bits",
+    "jhipsterVersion": "7.8.1",
+    "jwtSecretKey": "Y2E5NWFmYjgzMDliOTQ0ODY4MDVkNmNkMWFiOGM4ZjEyYjM1Mzg0NzdiZGY4MzBiM2NjMTM4ZTRjZDE1YTg1ZDE5YmNlYmIxYTkwMzc5MzFiNTc0NTdkZmNjZDBjZWI2YzBmM2IxZmEwZjNlMWQyYTEyNGE2ZWVhNTJhYjllMGM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1669409033000,
+    "messageBroker": false,
+    "nativeLanguage": "en",
+    "otherModules": [],
+    "packageFolder": "com/bits/opensociety",
+    "packageName": "com.bits.opensociety",
+    "pages": [],
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "searchEngine": false,
+    "serverPort": "8080",
+    "serviceDiscoveryType": "eureka",
+    "skipCheckLengthOfIdentifier": false,
+    "skipFakeData": false,
+    "skipUserManagement": false,
+    "testFrameworks": [],
+    "websocket": false,
+    "withAdminUi": true
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Visitor.
+    -->
+    <changeSet id="20221125203853-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="visitor_id"
+                                 baseTableName="rel_visitor__visiting_flat"
+                                 constraintName="fk_rel_visitor__visiting_flat__visitor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="visitor"/>
+
+        <addForeignKeyConstraint baseColumnNames="visiting_flat_id"
+                                 baseTableName="rel_visitor__visiting_flat"
+                                 constraintName="fk_rel_visitor__visiting_flat__visiting_flat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="visiting_flat"/>
+    </changeSet>
+</databaseChangeLog>

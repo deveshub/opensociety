@@ -1,0 +1,28 @@
+{
+  "openSocietyApp": {
+    "flat": {
+      "home": {
+        "title": "Flats",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Flat",
+        "createOrEditLabel": "Create or edit a Flat",
+        "notFound": "No Flats found"
+      },
+      "created": "A new Flat is created with identifier {{ param }}",
+      "updated": "A Flat is updated with identifier {{ param }}",
+      "deleted": "A Flat is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Flat {{ id }}?"
+      },
+      "detail": {
+        "title": "Flat"
+      },
+      "id": "ID",
+      "flatNo": "Flat No",
+      "residentialStatus": "Residential Status",
+      "flatArea": "Flat Area",
+      "flat": "Flat",
+      "flat": "Flat"
+    }
+  }
+}

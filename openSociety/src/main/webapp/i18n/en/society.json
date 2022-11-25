@@ -1,0 +1,25 @@
+{
+  "openSocietyApp": {
+    "society": {
+      "home": {
+        "title": "Societies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Society",
+        "createOrEditLabel": "Create or edit a Society",
+        "notFound": "No Societies found"
+      },
+      "created": "A new Society is created with identifier {{ param }}",
+      "updated": "A Society is updated with identifier {{ param }}",
+      "deleted": "A Society is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Society {{ id }}?"
+      },
+      "detail": {
+        "title": "Society"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

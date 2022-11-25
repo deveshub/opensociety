@@ -1,0 +1,78 @@
+<div>
+  <h2 id="page-heading" data-cy="FlatHeading">
+    <span bitsTranslate="openSocietyApp.flat.home.title">Flats</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.flat.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-flat"
+        [routerLink]="['/flat/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.flat.home.createLabel"> Create a new Flat </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="flats?.length === 0">
+    <span bitsTranslate="openSocietyApp.flat.home.notFound">No flats found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="flats && flats.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.flat.flatNo">Flat No</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.flat.residentialStatus">Residential Status</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.flat.flatArea">Flat Area</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.flat.flat">Flat</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flat of flats; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/flat', flat.id, 'view']">{{ flat.id }}</a>
+          </td>
+          <td>{{ flat.flatNo }}</td>
+          <td bitsTranslate="{{ 'openSocietyApp.ResidentialStatus.' + flat.residentialStatus }}">{{ flat.residentialStatus }}</td>
+          <td>{{ flat.flatArea }}</td>
+          <td>
+            <div *ngIf="flat.flat">
+              <a [routerLink]="['/society', flat.flat?.id, 'view']">{{ flat.flat?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/flat', flat.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/flat', flat.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(flat)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

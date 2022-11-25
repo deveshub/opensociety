@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="visitor">
+      <h2 data-cy="visitorDetailsHeading"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.detail.title">Visitor</span></h2>
+
+      <hr />
+
+      <bits-alert-error></bits-alert-error>
+
+      <bits-alert></bits-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span bitsTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ visitor.id }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.visitorType">Visitor Type</span></dt>
+        <dd>
+          <span bitsTranslate="{{ 'openSocietyApp.VisitorType.' + visitor.visitorType }}">{{ visitor.visitorType }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.mobile">Mobile</span></dt>
+        <dd>
+          <span>{{ visitor.mobile }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.vehicleNumber">Vehicle Number</span></dt>
+        <dd>
+          <span>{{ visitor.vehicleNumber }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.address">Address</span></dt>
+        <dd>
+          <span>{{ visitor.address }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.inTime">In Time</span></dt>
+        <dd>
+          <span>{{ visitor.inTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.outTime">Out Time</span></dt>
+        <dd>
+          <span>{{ visitor.outTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.visitorServiceVisitor.visitingFlat">Visiting Flat</span></dt>
+        <dd>
+          <span *ngFor="let visitingFlat of visitor.visitingFlats; let last = last">
+            <a [routerLink]="['/visiting-flat', visitingFlat?.id, 'view']">{{ visitingFlat.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span bitsTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/visitor', visitor.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span bitsTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<div>
+  <h2 id="page-heading" data-cy="VisitorHeading">
+    <span bitsTranslate="openSocietyApp.visitorServiceVisitor.home.title">Visitors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.visitorServiceVisitor.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-visitor"
+        [routerLink]="['/visitor/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.visitorServiceVisitor.home.createLabel"> Create a new Visitor </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="visitors?.length === 0">
+    <span bitsTranslate="openSocietyApp.visitorServiceVisitor.home.notFound">No visitors found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="visitors && visitors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.visitorType">Visitor Type</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.mobile">Mobile</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.vehicleNumber">Vehicle Number</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.address">Address</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.inTime">In Time</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.outTime">Out Time</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitor.visitingFlat">Visiting Flat</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visitor of visitors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/visitor', visitor.id, 'view']">{{ visitor.id }}</a>
+          </td>
+          <td bitsTranslate="{{ 'openSocietyApp.VisitorType.' + visitor.visitorType }}">{{ visitor.visitorType }}</td>
+          <td>{{ visitor.mobile }}</td>
+          <td>{{ visitor.vehicleNumber }}</td>
+          <td>{{ visitor.address }}</td>
+          <td>{{ visitor.inTime | formatMediumDatetime }}</td>
+          <td>{{ visitor.outTime | formatMediumDatetime }}</td>
+          <td>
+            <span *ngFor="let visitingFlat of visitor.visitingFlats; let last = last">
+              <a class="form-control-static" [routerLink]="['/visiting-flat', visitingFlat.id, 'view']">{{ visitingFlat.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/visitor', visitor.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/visitor', visitor.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(visitor)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

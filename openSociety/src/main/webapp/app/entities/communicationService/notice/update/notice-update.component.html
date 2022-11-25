@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="bits-notice-heading"
+        data-cy="NoticeCreateUpdateHeading"
+        bitsTranslate="openSocietyApp.communicationServiceNotice.home.createOrEditLabel"
+      >
+        Create or edit a Notice
+      </h2>
+
+      <div>
+        <bits-alert-error></bits-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" bitsTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.communicationServiceNotice.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" bitsTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.communicationServiceNotice.body" for="field_body">Body</label>
+          <input type="text" class="form-control" name="body" id="field_body" data-cy="body" formControlName="body" />
+          <div *ngIf="editForm.get('body')!.invalid && (editForm.get('body')!.dirty || editForm.get('body')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('body')?.errors?.required" bitsTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.communicationServiceNotice.publishDate" for="field_publishDate"
+            >Publish Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_publishDate"
+              data-cy="publishDate"
+              type="datetime-local"
+              class="form-control"
+              name="publishDate"
+              formControlName="publishDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('publishDate')!.invalid && (editForm.get('publishDate')!.dirty || editForm.get('publishDate')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('publishDate')?.errors?.required"
+              bitsTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('publishDate')?.errors?.ZonedDateTimelocal"
+              bitsTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.communicationServiceNotice.noticeType" for="field_noticeType"
+            >Notice Type</label
+          >
+          <select class="form-control" name="noticeType" formControlName="noticeType" id="field_noticeType" data-cy="noticeType">
+            <option [ngValue]="null">{{ 'openSocietyApp.NoticeType.null' | translate }}</option>
+            <option *ngFor="let noticeType of noticeTypeValues" [value]="noticeType">
+              {{ 'openSocietyApp.NoticeType.' + noticeType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.communicationServiceNotice.userId" for="field_userId">User Id</label>
+          <input type="number" class="form-control" name="userId" id="field_userId" data-cy="userId" formControlName="userId" />
+          <div *ngIf="editForm.get('userId')!.invalid && (editForm.get('userId')!.dirty || editForm.get('userId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('userId')?.errors?.required"
+              bitsTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('userId')?.errors?.number"
+              bitsTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span bitsTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span bitsTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

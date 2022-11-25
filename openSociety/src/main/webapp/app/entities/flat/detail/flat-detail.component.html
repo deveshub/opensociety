@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="flat">
+      <h2 data-cy="flatDetailsHeading"><span bitsTranslate="openSocietyApp.flat.detail.title">Flat</span></h2>
+
+      <hr />
+
+      <bits-alert-error></bits-alert-error>
+
+      <bits-alert></bits-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span bitsTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ flat.id }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.flat.flatNo">Flat No</span></dt>
+        <dd>
+          <span>{{ flat.flatNo }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.flat.residentialStatus">Residential Status</span></dt>
+        <dd>
+          <span bitsTranslate="{{ 'openSocietyApp.ResidentialStatus.' + flat.residentialStatus }}">{{ flat.residentialStatus }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.flat.flatArea">Flat Area</span></dt>
+        <dd>
+          <span>{{ flat.flatArea }}</span>
+        </dd>
+        <dt><span bitsTranslate="openSocietyApp.flat.flat">Flat</span></dt>
+        <dd>
+          <div *ngIf="flat.flat">
+            <a [routerLink]="['/society', flat.flat?.id, 'view']">{{ flat.flat?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span bitsTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/flat', flat.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span bitsTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

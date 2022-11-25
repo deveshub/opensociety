@@ -1,0 +1,29 @@
+{
+  "openSocietyApp": {
+    "visitorServiceVisitingFlat": {
+      "home": {
+        "title": "Visiting Flats",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Visiting Flat",
+        "createOrEditLabel": "Create or edit a Visiting Flat",
+        "notFound": "No Visiting Flats found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Visiting Flat {{ id }}?"
+      },
+      "detail": {
+        "title": "Visiting Flat"
+      },
+      "id": "ID",
+      "flatNo": "Flat No",
+      "visitor": "Visitor"
+    }
+  },
+  "visitorServiceApp": {
+    "visitorServiceVisitingFlat": {
+      "created": "A new Visiting Flat is created with identifier {{ param }}",
+      "updated": "A Visiting Flat is updated with identifier {{ param }}",
+      "deleted": "A Visiting Flat is deleted with identifier {{ param }}"
+    }
+  }
+}

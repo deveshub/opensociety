@@ -1,0 +1,11 @@
+export enum NoticeType {
+  SOCIETY = 'SOCIETY',
+
+  EVENT = 'EVENT',
+
+  FINANCE = 'FINANCE',
+
+  COMMERCIAL = 'COMMERCIAL',
+
+  EMERGENCY = 'EMERGENCY',
+}

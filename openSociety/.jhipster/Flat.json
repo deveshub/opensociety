@@ -1,0 +1,44 @@
+{
+  "applications": ["openSociety"],
+  "changelogDate": "20221125204053",
+  "databaseType": "sql",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "flat",
+  "fields": [
+    {
+      "fieldName": "flatNo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "residentialStatus",
+      "fieldType": "ResidentialStatus",
+      "fieldValues": "OWNED,RENTED,VACANT"
+    },
+    {
+      "fieldName": "flatArea",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Flat",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "member",
+      "otherEntityRelationshipName": "flat",
+      "relationshipName": "flat",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "society",
+      "otherEntityRelationshipName": "flat",
+      "relationshipName": "flat",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

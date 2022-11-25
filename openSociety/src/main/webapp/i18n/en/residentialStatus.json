@@ -1,0 +1,10 @@
+{
+  "openSocietyApp": {
+    "ResidentialStatus": {
+      "null": "",
+      "OWNED": "OWNED",
+      "RENTED": "RENTED",
+      "VACANT": "VACANT"
+    }
+  }
+}

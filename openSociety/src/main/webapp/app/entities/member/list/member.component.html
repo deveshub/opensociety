@@ -1,0 +1,84 @@
+<div>
+  <h2 id="page-heading" data-cy="MemberHeading">
+    <span bitsTranslate="openSocietyApp.member.home.title">Members</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.member.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-member"
+        [routerLink]="['/member/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.member.home.createLabel"> Create a new Member </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="members?.length === 0">
+    <span bitsTranslate="openSocietyApp.member.home.notFound">No members found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="members && members.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.name">Name</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.mobile">Mobile</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.email">Email</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.memberType">Member Type</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.user">User</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.member.flat">Flat</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of members; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/member', member.id, 'view']">{{ member.id }}</a>
+          </td>
+          <td>{{ member.name }}</td>
+          <td>{{ member.mobile }}</td>
+          <td>{{ member.email }}</td>
+          <td bitsTranslate="{{ 'openSocietyApp.MemberType.' + member.memberType }}">{{ member.memberType }}</td>
+          <td>
+            {{ member.user?.login }}
+          </td>
+          <td>
+            <div *ngIf="member.flat">
+              <a [routerLink]="['/flat', member.flat?.id, 'view']">{{ member.flat?.flatNo }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/member', member.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/member', member.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(member)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

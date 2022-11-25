@@ -1,0 +1,131 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="bits-member-heading" data-cy="MemberCreateUpdateHeading" bitsTranslate="openSocietyApp.member.home.createOrEditLabel">
+        Create or edit a Member
+      </h2>
+
+      <div>
+        <bits-alert-error></bits-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" bitsTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required" bitsTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.mobile" for="field_mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+          <div *ngIf="editForm.get('mobile')!.invalid && (editForm.get('mobile')!.dirty || editForm.get('mobile')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('mobile')?.errors?.required"
+              bitsTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" bitsTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.pattern"
+              bitsTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Email' }"
+            >
+              This field should follow pattern for "Email".
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.memberType" for="field_memberType">Member Type</label>
+          <select class="form-control" name="memberType" formControlName="memberType" id="field_memberType" data-cy="memberType">
+            <option [ngValue]="null">{{ 'openSocietyApp.MemberType.null' | translate }}</option>
+            <option *ngFor="let memberType of memberTypeValues" [value]="memberType">
+              {{ 'openSocietyApp.MemberType.' + memberType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('memberType')!.invalid && (editForm.get('memberType')!.dirty || editForm.get('memberType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('memberType')?.errors?.required"
+              bitsTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option *ngIf="!editForm.get('user')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['user'])!.invalid && (editForm.get(['user'])!.dirty || editForm.get(['user'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['user'])?.errors?.required" bitsTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.member.flat" for="field_flat">Flat</label>
+          <select class="form-control" id="field_flat" data-cy="flat" name="flat" formControlName="flat">
+            <option *ngIf="!editForm.get('flat')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="flatOption.id === editForm.get('flat')!.value?.id ? editForm.get('flat')!.value : flatOption"
+              *ngFor="let flatOption of flatsSharedCollection; trackBy: trackFlatById"
+            >
+              {{ flatOption.flatNo }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['flat'])!.invalid && (editForm.get(['flat'])!.dirty || editForm.get(['flat'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['flat'])?.errors?.required" bitsTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span bitsTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span bitsTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

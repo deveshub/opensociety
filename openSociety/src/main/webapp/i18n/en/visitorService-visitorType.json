@@ -1,0 +1,11 @@
+{
+  "openSocietyApp": {
+    "VisitorType": {
+      "null": "",
+      "GUEST": "GUEST",
+      "DELIVERY": "DELIVERY",
+      "STAFF": "STAFF",
+      "OTHER": "OTHER"
+    }
+  }
+}

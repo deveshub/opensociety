@@ -1,0 +1,132 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="bits-visitor-heading"
+        data-cy="VisitorCreateUpdateHeading"
+        bitsTranslate="openSocietyApp.visitorServiceVisitor.home.createOrEditLabel"
+      >
+        Create or edit a Visitor
+      </h2>
+
+      <div>
+        <bits-alert-error></bits-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" bitsTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.visitorType" for="field_visitorType"
+            >Visitor Type</label
+          >
+          <select class="form-control" name="visitorType" formControlName="visitorType" id="field_visitorType" data-cy="visitorType">
+            <option [ngValue]="null">{{ 'openSocietyApp.VisitorType.null' | translate }}</option>
+            <option *ngFor="let visitorType of visitorTypeValues" [value]="visitorType">
+              {{ 'openSocietyApp.VisitorType.' + visitorType | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('visitorType')!.invalid && (editForm.get('visitorType')!.dirty || editForm.get('visitorType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('visitorType')?.errors?.required"
+              bitsTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.mobile" for="field_mobile">Mobile</label>
+          <input type="text" class="form-control" name="mobile" id="field_mobile" data-cy="mobile" formControlName="mobile" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.vehicleNumber" for="field_vehicleNumber"
+            >Vehicle Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="vehicleNumber"
+            id="field_vehicleNumber"
+            data-cy="vehicleNumber"
+            formControlName="vehicleNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.address" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.inTime" for="field_inTime">In Time</label>
+          <div class="d-flex">
+            <input
+              id="field_inTime"
+              data-cy="inTime"
+              type="datetime-local"
+              class="form-control"
+              name="inTime"
+              formControlName="inTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" bitsTranslate="openSocietyApp.visitorServiceVisitor.outTime" for="field_outTime">Out Time</label>
+          <div class="d-flex">
+            <input
+              id="field_outTime"
+              data-cy="outTime"
+              type="datetime-local"
+              class="form-control"
+              name="outTime"
+              formControlName="outTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label bitsTranslate="openSocietyApp.visitorServiceVisitor.visitingFlat" for="field_visitingFlats">Visiting Flat</label>
+          <select
+            class="form-control"
+            id="field_visitingFlats"
+            data-cy="visitingFlat"
+            multiple
+            name="visitingFlats"
+            formControlName="visitingFlats"
+          >
+            <option
+              [ngValue]="getSelectedVisitingFlat(visitingFlatOption, editForm.get('visitingFlats')!.value)"
+              *ngFor="let visitingFlatOption of visitingFlatsSharedCollection; trackBy: trackVisitingFlatById"
+            >
+              {{ visitingFlatOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span bitsTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span bitsTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "openSocietyApp": {
+    "MemberType": {
+      "null": "",
+      "TENANT": "TENANT",
+      "OWNER": "OWNER"
+    }
+  }
+}

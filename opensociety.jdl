@@ -1,0 +1,125 @@
+//openSociety Frontend Gateway
+application {
+    config {
+        baseName openSociety
+        packageName com.bits.opensociety
+        applicationType gateway
+        serviceDiscoveryType eureka
+        authenticationType jwt
+        prodDatabaseType mysql
+        cacheProvider hazelcast
+        buildTool gradle
+        clientFramework angularX
+        jhiPrefix bits
+        languages [en]
+    }
+    entities *
+}
+
+entity Society {
+    name String required
+    description String
+}
+
+entity Member {
+    name String required
+    mobile String required
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+    memberType MemberType required
+}
+
+enum MemberType {
+    TENANT, OWNER
+}
+
+entity Flat {
+    flatNo String required
+    residentialStatus ResidentialStatus
+    flatArea Integer
+}
+
+enum ResidentialStatus {
+    OWNED, RENTED, VACANT
+}
+
+relationship OneToOne {
+    Member{user(login) required} to User
+}
+
+relationship OneToMany {
+    Flat{flat} to Member{flat(flatNo) required}
+}
+
+relationship ManyToOne {
+    Flat{flat} to Society
+}
+
+// Visitor Mgmt microservice
+application {
+    config {
+        baseName visitorService
+        packageName com.bits.opensociety
+        applicationType microservice
+        serviceDiscoveryType eureka
+        authenticationType jwt
+        prodDatabaseType mysql
+        buildTool gradle
+        serverPort 8081
+        languages [en]
+    }
+    entities Visitor, VisitingFlat
+}
+
+microservice Visitor, VisitingFlat with visitorService
+
+entity Visitor {
+    visitorType VisitorType required
+    mobile String
+    vehicleNumber String
+    address String
+    inTime Instant
+    outTime Instant
+}
+
+entity VisitingFlat {
+    flatNo String required
+}
+
+relationship ManyToMany {
+    Visitor{visitingFlat} to VisitingFlat{visitor}
+}
+
+enum VisitorType {
+    GUEST, DELIVERY, STAFF, OTHER
+}
+
+application {
+    config {
+        baseName communicationService
+        packageName com.demo.opensociety
+        applicationType microservice
+        serviceDiscoveryType eureka
+        authenticationType jwt
+        databaseType mongodb
+        cacheProvider no
+        enableHibernateCache false
+        buildTool gradle
+        serverPort 8082,
+        languages [en]
+    }
+    entities Notice
+}
+
+microservice Notice with communicationService
+
+entity Notice {
+    title String required
+    body String required
+    publishDate Instant required
+    noticeType NoticeType
+    userId Long required
+}
+
+enum NoticeType {
+    SOCIETY, EVENT, FINANCE, COMMERCIAL, EMERGENCY
+}

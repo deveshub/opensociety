@@ -1,0 +1,78 @@
+<div>
+  <h2 id="page-heading" data-cy="VisitingFlatHeading">
+    <span bitsTranslate="openSocietyApp.visitorServiceVisitingFlat.home.title">Visiting Flats</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span bitsTranslate="openSocietyApp.visitorServiceVisitingFlat.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-visiting-flat"
+        [routerLink]="['/visiting-flat/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span bitsTranslate="openSocietyApp.visitorServiceVisitingFlat.home.createLabel"> Create a new Visiting Flat </span>
+      </button>
+    </div>
+  </h2>
+
+  <bits-alert-error></bits-alert-error>
+
+  <bits-alert></bits-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="visitingFlats?.length === 0">
+    <span bitsTranslate="openSocietyApp.visitorServiceVisitingFlat.home.notFound">No visitingFlats found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="visitingFlats && visitingFlats.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span bitsTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span bitsTranslate="openSocietyApp.visitorServiceVisitingFlat.flatNo">Flat No</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visitingFlat of visitingFlats; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/visiting-flat', visitingFlat.id, 'view']">{{ visitingFlat.id }}</a>
+          </td>
+          <td>{{ visitingFlat.flatNo }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/visiting-flat', visitingFlat.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/visiting-flat', visitingFlat.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(visitingFlat)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" bitsTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
